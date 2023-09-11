@@ -1,4 +1,4 @@
-module github.com/starlink-community/starlink-cli
+module github.com/pjkundert/starlink-cli
 
 go 1.14
 
