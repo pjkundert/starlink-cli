@@ -8,7 +8,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	//"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/encoding/protojson"
 	pb "github.com/starlink-community/starlink-grpc-go/pkg/spacex.com/api/device"
 	"google.golang.org/grpc"
 )
@@ -58,6 +59,14 @@ func main() {
 		log.Fatalf("could not greet: %v", err)
 	}
 
-	t := proto.TextMarshaler{}
-	t.Marshal(os.Stdout, r)
+	//t := proto.TextMarshaler{}
+	//t.Marshal(os.Stdout, r)
+
+	// Marshal the Protobuf message to JSON
+	jsonBytes, err := protojson.Marshal(r)
+	if err != nil {
+		log.Fatalf("failed to marshal to JSON: %v", err)
+	}
+
+	fmt.Println(string(jsonBytes))
 }
